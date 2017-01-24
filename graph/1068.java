@@ -97,16 +97,6 @@ public class Main {
 		new Main().solve();
 	}
 
-	static class Pair {
-		int x;
-		int y;
-
-		Pair(int x, int y) {
-			this.x = x;
-			this.y = y;
-		}
-	}
-
 	static class sc {
 		private static BufferedReader br;
 		private static StringTokenizer st;

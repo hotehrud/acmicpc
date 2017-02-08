@@ -34,7 +34,7 @@ public class Main {
 			for (int j = 0; j < i; j++) {
 
 				if (array[i] > array[j] && dp[j] + 1 > dp[i]) {
-					dp[i] = dp[i] + 1;
+					dp[i] = dp[j] + 1;
 				}
 
 			}
@@ -45,15 +45,6 @@ public class Main {
 
 		}
 		System.out.println(max);
-	}
-
-	public static int getCount(int n, boolean female) {
-
-		if (female) {
-			n = (int) Math.ceil(n / 2);
-		}
-
-		return n;
 	}
 
 	public static void main(String[] args) {

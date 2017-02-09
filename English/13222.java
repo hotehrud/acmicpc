@@ -32,19 +32,6 @@ public class Main {
 		System.out.println(sb.toString());
 	}
 
-	public static int getCount(int[] count, int x, int y) {
-		int max = 0;
-
-		for (int i = x; i <= y; i++) {
-
-			if (count[i] >= max) {
-				max = count[i];
-			}
-
-		}
-		return max;
-	}
-
 	public static void main(String[] args) {
 		sc.init();
 

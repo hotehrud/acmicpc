@@ -38,7 +38,7 @@ public class Main {
 	public static int getCount(int n, boolean female) {
 
 		if (female) {
-			n = (int) Math.ceil(n / 2);
+			n = n/2;
 		}
 
 		return n;

@@ -3,46 +3,40 @@ package craw;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Arrays;
 import java.util.StringTokenizer;
 
 public class Main {
-	
-private void solve() {
-		String s = sc.readLine();
-		int len = s.length();
-		int[] dp = new int[len+1];
-		int[] array = new int[len+1];
-		
-		for(int i=0;i<len;i++) {
-			array[i+1] = s.charAt(i) - '0';
+
+	private void solve() {
+		String input = sc.readLine();
+		int len = input.length();
+
+		int[] dp = new int[len + 1];
+		int[] array = new int[len + 1];
+
+		for (int i = 0; i < len; i++) {
+			array[i + 1] = input.charAt(i) - '0';
 		}
-		
+
 		dp[0] = 1;
-		
-		// 01, 012, 0123 => 해석할 수 없기에 0
-		// dp[i] = 2가지 경우. 1. 한자리 숫자, 2. 두자리 숫자.
-		// 1. dp[i] = dp[i] + dp[i-1]
-		
-		for(int i=1;i<=len;i++) {
-			
-			if (array[i] >= 1 && array[i] <= 9) {
-				dp[i] = (dp[i] + dp[i-1]) % 1000000;
+
+		for (int i = 1; i <= len; i++) {
+
+			if (array[i] != 0) {
+				dp[i] = (dp[i - 1] + dp[i]) % 1000000;
 			}
-			
-			if (array[i-1] == 0) {
-				continue;
-			}
-			
-			int x = array[i-1]*10 + array[i];
-			
+
+			int x = array[i] + array[i - 1] * 10;
+
 			if (10 <= x && x <= 26) {
-				dp[i] = (dp[i] + dp[i-2]) % 1000000;
+				dp[i] = (dp[i - 2] + dp[i]) % 1000000;
 			}
-			
 		}
-		System.out.println(dp[len]);
+
+		System.out.println(dp[len] % 1000000);
 	}
-	
+
 	public static void main(String[] args) {
 		sc.init();
 

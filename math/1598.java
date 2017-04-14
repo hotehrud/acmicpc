@@ -1,0 +1,76 @@
+package craw;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.StringTokenizer;
+
+public class Main {
+
+	private void solve() {
+		int a = sc.nextInt();
+		int b = sc.nextInt();
+
+		int ax = (a % 4) == 0 ? 4 : a % 4;
+		int ay = (int) Math.ceil(a / 4.0);
+		int bx = (b % 4) == 0 ? 4 : b % 4;
+		int by = (int) Math.ceil(b / 4.0);
+
+		System.out.println(Math.abs(ax - bx) + Math.abs(ay - by));
+	}
+
+	public static void main(String[] args) {
+		sc.init();
+
+		new Main().solve();
+	}
+
+	static class sc {
+		private static BufferedReader br;
+		private static StringTokenizer st;
+
+		static void init() {
+			br = new BufferedReader(new InputStreamReader(System.in));
+			st = new StringTokenizer("");
+		}
+
+		static String readLine() {
+			try {
+				return br.readLine();
+			} catch (IOException e) {
+			}
+			return null;
+		}
+
+		static String readLineReplace() {
+			try {
+				return br.readLine().replaceAll("\\s+", "");
+			} catch (IOException e) {
+			}
+			return null;
+		}
+
+		static String next() {
+			while (!st.hasMoreTokens()) {
+				try {
+					st = new StringTokenizer(br.readLine());
+				} catch (IOException e) {
+				}
+			}
+			return st.nextToken();
+		}
+
+		static long nextLong() {
+			return Long.parseLong(next());
+		}
+
+		static int nextInt() {
+			return Integer.parseInt(next());
+		}
+
+		static double nextDouble() {
+			return Double.parseDouble(next());
+		}
+	}
+}

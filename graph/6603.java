@@ -22,7 +22,7 @@ public class Main {
 				array[i] = sc.nextInt();
 			}
 
-			for (int i = 0; i < k; i++) {
+			for (int i = 0; i < k - 5; i++) {
 				cnt = 1;
 				dfs(i, array[i] + " ");
 			}

@@ -1,5 +1,3 @@
-package craw;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -7,48 +5,34 @@ import java.util.StringTokenizer;
 
 public class Main {
 
+	// https://github.com/hotehrud/acmicpc
+	// http://mygumi.tistory.com/260
+
 	private void solve() {
 		int n = sc.nextInt();
-		long[][] dp = new long[n+1][10];
-		long[] ans = new long[n+1];
-	
-		// dp[N][L] = n 자리수에 마지막 숫자가 L인 경우
-		// dp[N][L] = dp[N-1][L-1] + dp[N-1][L+1] (1<=L<=8)
+		long[][] dp = new long[101][11];
 
-		ans[1] = 9;
-		
-		for(int i=1;i<10;i++) {
+		// dp[N][L] = dp[N - 1][L - 1] + dp[N - 1][L + 1]
+		// 길이 N, 마지막 숫자가 L일 경우
+
+		for (int i = 1; i <= 9; i++) {
 			dp[1][i] = 1;
 		}
-		
-		for(int i=2;i<=n;i++) {
 			
-			for(int j=0;j<10;j++) {
-				if (j == 0) {
-					dp[i][j] = dp[i-1][j+1];
-				} else if (j == 9) {
-					dp[i][j] = dp[i-1][j-1];
-				} else {
-					dp[i][j] = dp[i-1][j-1] + dp[i-1][j+1];					
-				}
-				dp[i][j] %= 1000000000;
-			}
-
-			for(int j=0;j<10;j++) {
-				ans[i] += dp[i][j]; 
+		for (int i = 2; i <= n; i++) {
+			dp[i][0] = dp[i - 1][1];
+			for (int j = 1; j <= 9; j++) {
+				dp[i][j] = (dp[i - 1][j - 1] + dp[i - 1][j + 1]) % 1000000000;
 			}
 		}
-		System.out.println(ans[n] % 1000000000);
+
+		long sum = 0;
+		for (int i = 0; i < 10; i++) {
+			sum += dp[n][i];
+		}
+		System.out.println(sum % 1000000000);
 	}
 
-	public static int max(int a, int b) {
-		if (a < b) {
-			return b;
-		} else {
-			return a;
-		}
-	}
-	
 	public static void main(String[] args) {
 		sc.init();
 
@@ -88,6 +72,10 @@ public class Main {
 				}
 			}
 			return st.nextToken();
+		}
+
+		static boolean hasNext() {
+			return st.hasMoreTokens();
 		}
 
 		static long nextLong() {

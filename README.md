@@ -1,1 +1,4 @@
-백준 알고리즘 문제 풀이 ID - hotehrud
+# algorithm-java
+
+## [source site](https://www.acmicpc.net)
+#### [my account - hotehrud](https://www.acmicpc.net/user/hotehrud)

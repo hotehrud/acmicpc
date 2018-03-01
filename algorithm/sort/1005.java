@@ -1,5 +1,3 @@
-package craw;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -43,7 +41,7 @@ public class Main {
 	}
 
 	public static int[] topologicalSort(boolean[][] adj, int[] indegree, int[] time) {
-		Queue<Integer> q = new LinkedList<>();
+		Queue<Integer> q = new LinkedList<Integer>();
 		int len = indegree.length;
 		int[] result = new int[len];
 
@@ -51,7 +49,6 @@ public class Main {
 			if (indegree[i] == 0) {
 				result[i] = time[i];
 				q.add(i);
-				break;
 			}
 		}
 

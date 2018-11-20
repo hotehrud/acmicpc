@@ -1,134 +1,115 @@
-package craw;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.Queue;
 import java.util.StringTokenizer;
 
 public class Main {
+  // http://mygumi.tistory.com/337
+  static ArrayList<Integer>[] a = (ArrayList<Integer>[]) new ArrayList[10001];
+  static boolean[] visited = new boolean[10001];
+  static int[] ans = new int[10001];
+  static int cnt = 0;
 
-	private void solve() {
-		int n = sc.nextInt();
-		int m = sc.nextInt();
+  private void solve() {
+    StringBuilder sb = new StringBuilder();
+    int n = sc.nextInt();
+    int m = sc.nextInt();
 
-		// 방향 그래프 v2->v1와 같이 정점 반대로 생각
-		
-		
-		StringBuilder sb = new StringBuilder();
-		ArrayList<Integer>[] a = (ArrayList<Integer>[]) new ArrayList[n + 1];
-		boolean[] c = new boolean[n+1];
-		int[] ans = new int[n+1];
+    for (int i = 1; i <= n; i++) {
+      a[i] = new ArrayList<Integer>();
+    }
 
-		for (int i = 1; i <= n; i++) {
-			a[i] = new ArrayList<>();
-		}
+    for (int i = 0; i < m; i++) {
+      int v1 = sc.nextInt();
+      int v2 = sc.nextInt();
 
-		for (int i = 0; i < m; i++) {
-			int v1 = sc.nextInt();
-			int v2 = sc.nextInt();
+      a[v1].add(v2);
+    }
 
-			a[v2].add(v1);
-		}
+    int max = 0;
+    for (int i = 1; i <= n; i++) {
+      visited = new boolean[10001];
+      dfs(i);
+    }
 
-		Queue<Integer> q = new LinkedList<>();
+    for (int i = 1; i <= n; i++) {
+      if (max < ans[i]) {
+        max = ans[i];
+      }
+    }
 
-		int max = 0;
-		int idx = 0;
-		for(int i=1;i<=n;i++) {
-			int cnt = 0;
-			Arrays.fill(c, false);
-			
-			q.add(i);
-			c[i] = true;
-			while (!q.isEmpty()) {
-				
-				int v = q.poll();
-				
-				for(int x : a[v]) {
-					
-					if (!c[x]) {
-						q.add(x);
-						c[x] = true;
-						cnt++;
-					}
-					
-				}
-				
-			}
-			
-			// 이전 값 유지 max 값들 구하기
-			if (max < cnt) {
-				idx = 0;
-				max = cnt;
-				ans[idx++] = i;
-			} else if (max == cnt) {
-				ans[idx++] = i;
-			}
-			
-		}
-		
-		for(int i=0;i<idx;i++) {
-			sb.append(ans[i] + " ");
-		}
-		
-		System.out.println(sb.toString());
-	}
+    for (int i = 1; i <= n; i++) {
+      if (max == ans[i]) {
+        sb.append(i + " ");
+      }
+    }
 
-	public static void main(String[] args) {
-		sc.init();
+    System.out.println(sb.toString());
+  }
 
-		new Main().solve();
-	}
+  public static void dfs(int v) {
+    visited[v] = true;
 
-	static class sc {
-		private static BufferedReader br;
-		private static StringTokenizer st;
+    for (int vv : a[v]) {
+      if (!visited[vv]) {
+        ans[vv]++;
+        dfs(vv);
+      }
+    }
+  }
 
-		static void init() {
-			br = new BufferedReader(new InputStreamReader(System.in));
-			st = new StringTokenizer("");
-		}
+  public static void main(String[] args) {
+    sc.init();
 
-		static String readLine() {
-			try {
-				return br.readLine();
-			} catch (IOException e) {
-			}
-			return null;
-		}
+    new Main().solve();
+  }
 
-		static String readLineReplace() {
-			try {
-				return br.readLine().replaceAll("\\s+", "");
-			} catch (IOException e) {
-			}
-			return null;
-		}
+  static class sc {
+    private static BufferedReader br;
+    private static StringTokenizer st;
 
-		static String next() {
-			while (!st.hasMoreTokens()) {
-				try {
-					st = new StringTokenizer(br.readLine());
-				} catch (IOException e) {
-				}
-			}
-			return st.nextToken();
-		}
+    static void init() {
+      br = new BufferedReader(new InputStreamReader(System.in));
+      st = new StringTokenizer("");
+    }
 
-		static long nextLong() {
-			return Long.parseLong(next());
-		}
+    static String readLine() {
+      try {
+        return br.readLine();
+      } catch (IOException e) {
+      }
+      return null;
+    }
 
-		static int nextInt() {
-			return Integer.parseInt(next());
-		}
+    static String readLineReplace() {
+      try {
+        return br.readLine().replaceAll("\\s+", "");
+      } catch (IOException e) {
+      }
+      return null;
+    }
 
-		static double nextDouble() {
-			return Double.parseDouble(next());
-		}
-	}
+    static String next() {
+      while (!st.hasMoreTokens()) {
+        try {
+          st = new StringTokenizer(br.readLine());
+        } catch (IOException e) {
+        }
+      }
+      return st.nextToken();
+    }
+
+    static long nextLong() {
+      return Long.parseLong(next());
+    }
+
+    static int nextInt() {
+      return Integer.parseInt(next());
+    }
+
+    static double nextDouble() {
+      return Double.parseDouble(next());
+    }
+  }
 }

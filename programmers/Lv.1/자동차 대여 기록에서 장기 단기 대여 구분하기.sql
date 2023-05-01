@@ -1,0 +1,25 @@
+-- https://school.programmers.co.kr/learn/courses/30/lessons/151138
+-- 본인 풀이
+SELECT
+    HISTORY_ID,
+    CAR_ID,
+    DATE_FORMAT(START_DATE, '%Y-%m-%d') as START_DATE,
+    DATE_FORMAT(END_DATE, '%Y-%m-%d') as END_DATE,
+    CASE WHEN DATEDIFF(END_DATE, START_DATE) + 1 >= 30
+             THEN '장기 대여'
+         ELSE '단기 대여'
+        END
+                                        as RENT_TYPE
+FROM CAR_RENTAL_COMPANY_RENTAL_HISTORY
+WHERE Month(START_DATE) = '9' AND YEAR(START_DATE) = '2022'
+ORDER BY HISTORY_ID DESC
+
+-- 다른 사람의 풀이
+SELECT
+    A.HISTORY_ID,A.CAR_ID,
+    LEFT(A.START_DATE,10) START_DATE,
+    LEFT(A.END_dATE,10) END_DATE,
+    CASE WHEN END_DATE-START_DATE +1 >=30 THEN '장기 대여' ELSE '단기 대여' END AS RENT_TYPE
+FROM CAR_RENTAL_COMPANY_RENTAL_HISTORY A
+WHERE LEFT(START_DATE,7) = '2022-09'
+ORDER BY HISTORY_ID desc;

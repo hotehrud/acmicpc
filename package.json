@@ -1,0 +1,13 @@
+{
+  "name": "acmicpc",
+  "version": "1.0.0",
+  "description": "## [source site](https://www.acmicpc.net) #### [my account - mygumi](https://www.acmicpc.net/user/mygumi)",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "prettier": "^3.6.2"
+  }
+}
